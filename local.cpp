@@ -14,6 +14,8 @@ signed main() {
     cin.tie(0) -> sync_with_stdio(0) ; 
     file("ht") 
 
+    cin >> n ; 
+
     return 0 ;
 }
 
