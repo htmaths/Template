@@ -5,49 +5,42 @@
 #define pb push_back
 using namespace std ; 
 
-const int maxn = 1e6 + 10 ; 
+const int maxn = 1e4 + 10 ; 
 const ll base = 131 ; 
 const ll MOD = 1e9 + 7 ;
-const int INF = 2e9 ;
+const int INF = 2e9 ; 
 
-struct idx {
-    int vl , ps ;
-    idx() {
-        vl = 0 ; 
-        ps = 0 ; 
-    } 
-} ; 
-
-bool operator< (const idx a ,const idx b) {
-    return a.vl < b.vl ; 
-}
-
-idx a[maxn] , b[maxn] ; 
-int n ; 
-
+int n , k ; 
+int a[maxn], b[maxn], c[maxn], d[maxn];
 signed main() {
     cin.tie(0) -> sync_with_stdio(0) ; 
     file("ht") 
 
-    cin >> n ; 
+    cin >> n >> k ; 
 
-    for(int i = 1 ; i <= n ; ++i) cin >> a[i].vl , a[i].ps = i ; 
-    for(int i = 1 ; i <= n ; ++i) cin >> b[i].vl , b[i].ps = i ; 
+    for(int i = 1; i <= n; ++i) cin >>a[i];
+    for(int i = 1; i <= n; ++i) cin >>b[i];
+    for(int i = 1; i <= n; ++i) cin >>c[i];
+    for(int i = 1; i <= n; ++i) cin >>d[i];
 
-    sort(a + 1 , a + 1 + n) ; 
+    vector<int> s, t;
 
-    vector<int> save ; int index = 1 ; 
-    vector<pair<int ,int>> ans ; 
+    for (int i = 1; i <= n; ++i)
+        for (int j = 1; j <= n; ++j)
+            s.pb(a[i] + b[j]);
 
-    for(int i = 1 ; i <= n ; ++i) {
-        while(index <= n && b[index].vl < a[i].vl) save.pb(index++) ;
+    for (int i = 1; i <= n; ++i)
+        for (int j = 1; j <= n; ++j)
+            t.pb(c[i] + d[j]);
 
+    sort(s.begin(), s.end());
 
-        if (save.size()) {
-            ans.pb({a[i].ps , b[save.back()].ps}) ; 
-        } 
-    }
+    ll ans = 0;
+
+    for (int x: t)
+        ans += upper_bound(s.begin(), s.end(), k - x) - lower_bound(s.begin(), s.end(), k - x);
+
+    cout << ans ; 
 
     return 0 ;
 }
-

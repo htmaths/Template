@@ -12,7 +12,22 @@ const int INF = 2e9 ;
 
 signed main() {
     cin.tie(0) -> sync_with_stdio(0) ; 
-    file("ht") 
+    file("BAI1") 
+
+    int n ; 
+    cin >> n ;  
+    cin.ignore() ;
+    string s ;
+    getline(cin , s) ;
+
+    string ans ;  
+
+    for(int i = 0 ; i < s.size() ; ++i) if (s[i] != ' ') {
+        if (isalpha(s[i])) 
+            ans += tolower(s[i]) ; else ans += s[i] ; 
+    }
+
+    cout << ans ; 
 
     return 0 ;
 }
